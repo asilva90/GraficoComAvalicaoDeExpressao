@@ -30,5 +30,6 @@
 *.exe
 *.out
 *.app
+myprogram
 
 build

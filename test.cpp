@@ -1,5 +1,4 @@
 #define SDL_MAIN_HANDLED
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -144,13 +143,21 @@ void display()
     setPixel( 360, 240, RGB(255,255,255) );
 }
 
-int main(int, char **)
+
+// Inicializa o SDL, abre a janela e controla o loop
+// principal do controle de eventos
+int main()
 {
-    std::cout << "Hello, world!\n";
+    // Inicializações iniciais obrigatórias
+
+    setlocale(LC_ALL, NULL);
+
+    SDL_Init(SDL_INIT_VIDEO);
+
     SDL_Window * window = SDL_CreateWindow(titulo.c_str(),
-    SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-    640, 480,
-    SDL_WINDOW_RESIZABLE);
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        640, 480,
+        SDL_WINDOW_RESIZABLE);
 
     window_surface = SDL_GetWindowSurface(window);
 
@@ -158,7 +165,12 @@ int main(int, char **)
     width = window_surface->w;
     height = window_surface->h;
 
-    while (1)
+    // Fim das inicializações
+
+    printf("Pixel format: %s\n",
+        SDL_GetPixelFormatName(window_surface->format->format));
+
+     while (1)
     {
 
         SDL_Event event;
@@ -212,5 +224,5 @@ int main(int, char **)
 
         SDL_UpdateWindowSurface(window);
     }
-
 }
+ 
